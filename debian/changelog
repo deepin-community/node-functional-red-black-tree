@@ -1,0 +1,41 @@
+node-functional-red-black-tree (1.0.1+20181105-5) unstable; urgency=medium
+
+  [ Debian Janitor ]
+  * Trim trailing whitespace.
+  * Bump debhelper dependency to >= 10, since that's what is used in
+    debian/compat.
+  * Bump debhelper from old 10 to 12.
+  * Set debhelper-compat version in Build-Depends.
+  * Set upstream metadata fields: Bug-Database, Bug-Submit, Repository,
+    Repository-Browse.
+  * Update standards version to 4.5.0, no changes needed.
+
+ -- Jelmer Vernooĳ <jelmer@debian.org>  Sat, 28 Aug 2021 23:49:32 +0100
+
+node-functional-red-black-tree (1.0.1+20181105-4) unstable; urgency=medium
+
+  * fix autopkgtest path hacking regexes
+  * mark Multi-Arch: foreign
+
+ -- Jonas Smedegaard <dr@jones.dk>  Wed, 04 Dec 2019 21:32:16 +0100
+
+node-functional-red-black-tree (1.0.1+20181105-3) unstable; urgency=medium
+
+  * add DEP-3 patch header
+  * fix clean generated docs
+
+ -- Jonas Smedegaard <dr@jones.dk>  Sat, 30 Nov 2019 11:25:47 +0100
+
+node-functional-red-black-tree (1.0.1+20181105-2) unstable; urgency=medium
+
+  * Team upload.
+  * No-change source-only upload to allow testing migration.
+
+ -- Boyuan Yang <byang@debian.org>  Sun, 03 Nov 2019 14:33:46 -0500
+
+node-functional-red-black-tree (1.0.1+20181105-1) unstable; urgency=low
+
+  * Initial release.
+    Closes: Bug#943330.
+
+ -- Jonas Smedegaard <dr@jones.dk>  Wed, 23 Oct 2019 15:50:32 +0200

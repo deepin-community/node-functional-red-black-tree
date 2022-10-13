@@ -1,0 +1,34 @@
+Test-Command: node -e "require('functional-red-black-tree');"
+Depends:
+ node-functional-red-black-tree,
+Restrictions: superficial
+
+Test-Command: node -e "
+ require('/usr/share/javascript/functional-red-black-tree/rbtree');
+ require('/usr/share/javascript/functional-red-black-tree/rbtree.min');
+ "
+Depends:
+ libjs-functional-red-black-tree,
+ nodejs,
+Restrictions: superficial
+
+Test-Command:
+ sed -i -e 's,\.\./rbtree.js,functional-red-black-tree,' test/test.js
+ && tape test/*.js
+Depends:
+ node-functional-red-black-tree,
+ node-tape,
+
+Test-Command:
+ sed -i -e 's,\.\./rbtree.js,/usr/share/javascript/functional-red-black-tree/rbtree.js,' test/test.js
+ && tape test/*.js
+Depends:
+ libjs-functional-red-black-tree,
+ node-tape,
+
+Test-Command:
+ sed -i -e 's,\.\./rbtree.js,/usr/share/javascript/functional-red-black-tree/rbtree.min.js,' test/test.js
+ && tape test/*.js
+Depends:
+ libjs-functional-red-black-tree,
+ node-tape,

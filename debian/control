@@ -1,0 +1,96 @@
+Source: node-functional-red-black-tree
+Section: javascript
+Priority: optional
+Maintainer: Debian Javascript Maintainers <pkg-javascript-devel@lists.alioth.debian.org>
+Uploaders:
+ Jonas Smedegaard <dr@jones.dk>,
+Build-Depends:
+ brotli,
+ node-tape <!nocheck>,
+ debhelper-compat (= 12),
+ pandoc <!nodoc>,
+ pigz,
+ uglifyjs (>= 3),
+Standards-Version: 4.5.0
+Homepage: https://github.com/mikolalysenko/functional-red-black-tree
+Vcs-Browser: https://salsa.debian.org/js-team/node-functional-red-black-tree
+Vcs-Git: https://salsa.debian.org/js-team/node-functional-red-black-tree.git
+Rules-Requires-Root: no
+
+Package: node-functional-red-black-tree
+Architecture: all
+Multi-Arch: foreign
+Depends:
+ nodejs,
+ ${misc:Depends},
+Description: fully persistent balanced binary search tree - Node.js library
+ Functional-red-black-tree is a fully persistent red-black tree
+ written 100% in JavaScript.
+ .
+ Functional (or fully persistent) data structures
+ allow for non-destructive updates.
+ So if you insert an element into the tree,
+ it returns a new tree with the inserted element
+ rather than destructively updating the existing tree in place.
+ Doing this requires using extra memory,
+ and if one were naive it could cost as much as reallocating the entire tree.
+ Instead, this data structure saves some memory
+ by recycling references to previously allocated subtrees.
+ This requires using only O(log(n)) additional memory per update
+ instead of a full O(n) copy.
+ .
+ Some advantages of this is
+ that it is possible to apply insertions and removals to the tree
+ while still iterating over previous versions of the tree.
+ Functional and persistent data structures can also be useful
+ in many geometric algorithms
+ like point location within triangulations or ray queries,
+ and can be used to analyze the history of executing various algorithms.
+ This added power though comes at a cost,
+ since it is generally a bit slower to use a functional data structure
+ than an imperative version.
+ However, if your application needs this behavior
+ then you may consider using this module.
+ .
+ This package provides functional-red-black-tree
+ for use with Node.js -
+ an event-based server-side JavaScript engine.
+
+Package: libjs-functional-red-black-tree
+Architecture: all
+Multi-Arch: foreign
+Depends:
+ ${misc:Depends},
+Recommends:
+ javascript-common,
+Description: fully persistent balanced binary search tree - browser library
+ Functional-red-black-tree is a fully persistent red-black tree
+ written 100% in JavaScript.
+ .
+ Functional (or fully persistent) data structures
+ allow for non-destructive updates.
+ So if you insert an element into the tree,
+ it returns a new tree with the inserted element
+ rather than destructively updating the existing tree in place.
+ Doing this requires using extra memory,
+ and if one were naive it could cost as much as reallocating the entire tree.
+ Instead, this data structure saves some memory
+ by recycling references to previously allocated subtrees.
+ This requires using only O(log(n)) additional memory per update
+ instead of a full O(n) copy.
+ .
+ Some advantages of this is
+ that it is possible to apply insertions and removals to the tree
+ while still iterating over previous versions of the tree.
+ Functional and persistent data structures can also be useful
+ in many geometric algorithms
+ like point location within triangulations or ray queries,
+ and can be used to analyze the history of executing various algorithms.
+ This added power though comes at a cost,
+ since it is generally a bit slower to use a functional data structure
+ than an imperative version.
+ However, if your application needs this behavior
+ then you may consider using this module.
+ .
+ This package provides functional-red-black-tree
+ for use directly in web browsers.

@@ -1,0 +1,68 @@
+#!/usr/bin/make -f
+
+# generate documentation unless nodoc requested
+ifeq (,$(filter nodoc,$(DEB_BUILD_OPTIONS)))
+DOCS = README.html README.txt
+endif
+
+# resolve copyright from upstream hint, or fail
+COPYRIGHT = $(shell grep -Po '^Copyright( \(c\))? \K.*' LICENSE)
+$(if $(COPYRIGHT),,$(error ERROR: Failed to resolve copyright hint))
+
+# GNU LibreJS 5.0 compatible license string
+# * See <https://www.gnu.org/software/librejs/free-your-javascript.html>
+LICENSE = magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&dn=expat.txt Expat
+
+override_dh_auto_build: $(DOCS) \
+ debian/js/rbtree.js debian/js/rbtree.min.js.gz
+
+override_dh_auto_test:
+ifeq (,$(filter nocheck,$(DEB_BUILD_OPTIONS)))
+	tape test/*.js
+endif
+
+override_dh_installdocs:
+	dh_installdocs --all -- $(DOCS)
+
+override_dh_clean:
+	dh_clean -- $(DOCS)
+
+debian/js/rbtree.min.js: rbtree.js
+debian/js/rbtree.js: rbtree.js
+	mkdir --parents $(dir $@)
+	echo '// @copyright $(COPYRIGHT)' >> $@
+	echo '// @license $(LICENSE)' >> $@
+	cat $< >> $@
+	echo '// @license-end' >> $@
+
+# optimize JavaScript for browser use
+# * include source-map
+debian/js/%.min.js:
+	$(if $<,,$(error source missing for browser library of $*))
+	mkdir --parents $(dir $@)
+	$(strip uglifyjs --compress --mangle \
+		--source-map "base='$(abspath $(dir $@))',url='$(notdir $@).map'" \
+		--output $@ \
+		-- $<)
+	mv -f $@ $@~
+	$(if $(COPYRIGHT),echo '// @copyright $(COPYRIGHT)' >> $@)
+	$(if $(LICENSE),echo '// @license $(LICENSE)' >> $@)
+	cat $@~ >> $@
+	$(if $(LICENSE),echo '// @license-end' >> $@)
+	rm -f $@~
+
+# pre-compress for browser use
+%.gz: %
+	pigz --force --keep -11 -- $<
+	brotli --force --keep --best -- $<
+
+%.html: %.md
+	pandoc --from gfm-raw_html --to html --standalone --output $@ $<
+
+%.txt: %.md
+	pandoc --from gfm-raw_html --to plain --output $@ $<
+
+%:
+	dh $@
+
+.SECONDARY:
