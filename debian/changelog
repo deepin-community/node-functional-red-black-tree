@@ -1,3 +1,25 @@
+node-functional-red-black-tree (1.0.1+20181105-7) unstable; urgency=medium
+
+  [ Debian Janitor ]
+  * Update lintian override info format in d/source/lintian-overrides on line 2.
+
+ -- Jelmer Vernooĳ <jelmer@debian.org>  Mon, 21 Nov 2022 12:56:56 +0000
+
+node-functional-red-black-tree (1.0.1+20181105-6) unstable; urgency=medium
+
+  [ Debian Janitor ]
+  * Bump debhelper from old 12 to 13.
+    + Drop check for DEB_BUILD_OPTIONS containing "nocheck", since debhelper now
+      does this.
+  * Update standards version to 4.6.0, no changes needed.
+  * Update lintian override info to new format on line 3.
+  * Update standards version to 4.6.1, no changes needed.
+
+  [ Jelmer Vernooĳ ]
+  * Fix override.
+
+ -- Jelmer Vernooĳ <jelmer@debian.org>  Mon, 21 Nov 2022 08:23:42 +0000
+
 node-functional-red-black-tree (1.0.1+20181105-5) unstable; urgency=medium
 
   [ Debian Janitor ]

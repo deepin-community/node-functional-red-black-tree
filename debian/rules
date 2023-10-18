@@ -17,9 +17,7 @@ override_dh_auto_build: $(DOCS) \
  debian/js/rbtree.js debian/js/rbtree.min.js.gz
 
 override_dh_auto_test:
-ifeq (,$(filter nocheck,$(DEB_BUILD_OPTIONS)))
 	tape test/*.js
-endif
 
 override_dh_installdocs:
 	dh_installdocs --all -- $(DOCS)
